@@ -1,2 +1,2 @@
 # shell
-Dependency free she'll scripts
+Dependency free shell scripts
