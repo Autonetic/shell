@@ -44,12 +44,19 @@ TEMP_F=$(($TEMP_C * 9/5 + 32))
 date=$(date '+(%d-%m-%Y %H:%M:%S)')
 
 echo "${BGREEN}$date"
+echo "$date" >> cpu-log.txt
 if [ $TEMP_C -le 35 ] 
-        then echo "${YELLOW}Current Temperature:" "${BGREEN}$TEMP_C C" 
-elif [ $TEMP_C -le 80 ]
-        then echo "${YELLOW}Current Temperature:" "${BYELLOW}$TEMP_C C"
+        then 
+        	echo "${YELLOW}Current Temperature:" "${BGREEN}$TEMP_C C" &&
+        	echo "Temperature was:" "$TEMP_C C" >> cpu-log.txt
+elif [ $TEMP_C -le 80 ] 
+        then 
+        	echo "${YELLOW}Current Temperature:" "${BYELLOW}$TEMP_C C" &&
+        	echo "Temperature was:" "$TEMP_C C" >> cpu-log.txt
 elif [ $TEMP_C -gt 81 ]
-        then echo "${YELLOW}Current Temperature:" "${BRED}${URED}$TEMP_C C"
+        then 
+        	echo "${YELLOW}Current Temperature:" "${BRED}${URED}$TEMP_C C${NC}" &&
+        	echo "Temperature was:" "$TEMP_C C" >> cpu-log.txt
 fi
   sleep 15
 done
