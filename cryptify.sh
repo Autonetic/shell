@@ -16,10 +16,12 @@ ON_BLUE='\033[44m'
 ON_GREEN='\033[42m'
 NC='\033[0m' # No Color
 
-echo ${BBLUE}"+----------------------------------------+"${NC}
-echo ${ON_BLUE}"|--------------=[Cryptify]=--------------|"${NC} 
-echo ${ON_GREEN}"|------File and Directory encryptor------|"${NC}
-echo ${BBLUE}"+----------------------------------------+"${NC}
+echo "${GREEN}+-----------------------------------------+"
+echo "|\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\|"
+echo "|-------------=[ ${NC}${YELLOW}CryptifyR${NC}${GREEN} ]=-------------|"
+echo "|-----=(${NC}${BYELLOW}File & Directory encryption${NC}${GREEN})=-----|"
+echo "|/\/\/\/\/\/${NC}${YELLOW}Coded@ Autonetix.co${NC}${GREEN}/\/\/\/\/\/|"
+echo "+-----------------------------------------+${NC}"
 echo ${BGREEN}"Welcome to Cryptify! the simple file and directory encryptor!"${NC}
 echo ${GREEN}"Please enter the file or directoy to work with:"${NC}
 read DIR
