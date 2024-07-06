@@ -1,5 +1,5 @@
 #!/bin/bash
-#File backup script
+
 
 #elevate privileges to sudo...
 if [ "$EUID" != 0 ]; then
@@ -28,26 +28,26 @@ NC='\033[0m'
 #create some functions to controll the flow of the program...
 compress_backup () { tar -zcvf "$FOLDER.tar.gz" "$FOLDER"; }
 change_ownership () { chown "$EXECUTOR:$EXECUTOR" "$FOLDER"; }
-copy_files () { cp -r "$path" "$FOLDER"; }
+copy_files () { cp -r "$DIRS" "$FOLDER"; }
 
 #define some variables...
 EXECUTOR="${SUDO_USER:-${USER}}"
 date=$(date '+%d-%m-%Y-%H.%M')
 
-if [ -d "backup-$date" ]; then
-        FOLDER="backup-$date-2"
+if [ -d "/home/$EXECUTOR/backup-$date" ]; then
+        FOLDER="/home/$EXECUTOR/backup-$date-2"
         else
-                mkdir "backup-$date" && FOLDER="backup-$date"
+                mkdir "/home/$EXECUTOR/backup-$date" && FOLDER="/home/$EXECUTOR/backup-$date"
 fi
 
 
 # Paths to be backed up...
 echo -e "${BYELLOW}Please enter whitespace-separated paths that you wish to backup. eg /var/www /var/log etc.:${NC}"
-read -a PATHS
-for PATH in "${PATHS[@]}"
+read -a DIRS
+for DIR in "${DIRS[@]}"
 do
         copy_files
-        echo "copied... $PATH"
+        echo -e "${BYELLOW}copied...${NC} ${BBLUE}$DIR${NC}"
 done
 
 echo -e "${BYELLOW}files backed up to${NC} ${BBLUE}$FOLDER${NC} \n"
@@ -56,7 +56,7 @@ echo -e "${BYELLOW}Would you like to compress the backup? 'yes' or 'no'?${NC}"
 read INPUT
 
 if [ "$INPUT" = yes ]; then
-	echo -e "Changing ownership of ${BBLUE}$FOLDER${NC}"
+	echo -e "${BYELLOW}Changing ownership of${NC} ${BBLUE}$FOLDER${NC}"
 	if change_ownership; then
 		echo -e "${BGREEN}Ownership aquired for${NC} ${BBLUE}$EXECUTOR${NC}${BGREEN}...${NC}"
 	else
