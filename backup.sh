@@ -28,7 +28,7 @@ NC='\033[0m'
 #create some functions to controll the flow of the program...
 compress_backup () { tar -zcvf "$FOLDER.tar.gz" "$FOLDER"; }
 change_ownership () { chown "$EXECUTOR:$EXECUTOR" "$FOLDER"; }
-copy_files () { cp -r "$DIRS" "$FOLDER"; }
+copy_files () { cp -r "$DIR" "$FOLDER"; }
 
 #define some variables...
 EXECUTOR="${SUDO_USER:-${USER}}"
